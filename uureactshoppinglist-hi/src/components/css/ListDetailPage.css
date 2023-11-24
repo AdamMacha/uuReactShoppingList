@@ -1,11 +1,12 @@
-.shoppinglist {
+.shoppinglists {
+    margin-top: 20px;
     display: flex;
     flex-wrap: wrap; 
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 0 auto;
     padding: 20px;
 }
 

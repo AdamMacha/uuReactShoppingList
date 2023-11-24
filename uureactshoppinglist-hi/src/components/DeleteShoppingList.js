@@ -1,5 +1,5 @@
 import React from 'react';
-import "./DeleteShoppingList.css"
+import "./css/DeleteShoppingList.css"
 
 const DeleteShoppingList = ({ onDelete, listId }) => {
   const handleDeleteList = () => {

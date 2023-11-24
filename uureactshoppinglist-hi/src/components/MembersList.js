@@ -1,4 +1,4 @@
-import "./MembersList.css"
+import "./css/MembersList.css"
 
 import { useState } from "react"
 import React from 'react'

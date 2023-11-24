@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import "./CreateShoppingList.css"
+import "./css/CreateShoppingList.css"
 
 const CreateShoppingList = ({ onCreate }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

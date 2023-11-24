@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import Items from './Items';
 import MembersList from './MembersList';
-import "./ListDetailPage.css";
+import "./css/ListDetailPage.css";
 
 const demoItems = {
   0: [

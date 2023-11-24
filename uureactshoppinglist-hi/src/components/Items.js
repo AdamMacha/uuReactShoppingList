@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Items.css"
+import "./css/Items.css"
 
 import { Button } from "react-bootstrap";
 import { BiPencil } from "react-icons/bi";
@@ -80,11 +80,11 @@ const Items = (props) => {
         const updatedResolvedItems = [...resolvedItems, itemToResolve];
         setResolvedItems(updatedResolvedItems);
     
-        // Odstranit vyřešenou položku ze seznamu
+        
         const updatedItems = items.filter((item) => item.id !== id);
         setItems(updatedItems);
     
-        // Zavřít detaily, pokud byly otevřeny pro vyřešenou položku
+        
         if (openedItem && openedItem.id === id) {
           setOpenedItem(null);
           setEditedItem(null);
@@ -98,7 +98,7 @@ const Items = (props) => {
         );
         setResolvedItems(updatedResolvedItems);
     
-        // Přidat zpět do seznamu items
+        
         const updatedItems = [...items, itemToUnresolve];
         setItems(updatedItems);
       };
