@@ -4,9 +4,7 @@ import { useState } from "react"
 import React from 'react'
 
 const DEMO_LIST = [
-    {id: 1, title: "Adam Mácha (vlastník)"},
-    {id: 2, title: "Karel Mácha"},
-    {id: 3, title: "Karel Hynek Mácha"}
+    {id: 1, title: "vlastník"},
 ]
 
 function MembersList() {

@@ -3,7 +3,6 @@ import { useLocation, useParams } from 'react-router-dom';
 import Items from './Items';
 import MembersList from './MembersList';
 import "./ListDetailPage.css";
-import data from '../data/data';
 
 const demoItems = {
   0: [
@@ -44,7 +43,7 @@ const ListDetailPage = () => {
     const itemsForList = demoItems[id] || [];
 
   return (
-    <div className="shoppinglist">
+    <div className="shoppinglists">
       <div className="items">
       <Items title={listTitle} items={itemsForList}/>
       </div>
