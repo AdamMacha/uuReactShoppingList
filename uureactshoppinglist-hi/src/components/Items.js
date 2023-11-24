@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Items.css"
+import data from "../data/data";
 
 import { Button } from "react-bootstrap";
 import { BiPencil } from "react-icons/bi";
@@ -9,19 +10,14 @@ const DEMO_items = [
     
         {
             id: 0,
-            name: "Jablka",
-            pcs: "5",
-        },
-        {
-            id: 1,
-            name: "Hrušky",
-            pcs: "3",
+            name: "test",
+            pcs: "1",
         }
 
 ]
 
 const Items = (props) => {
-    const [items, setItems] = useState(DEMO_items);
+    const [items, setItems] = useState(props.items);
     const [title, setTitle] = useState(props.title)
 
     const [newItem, setNewItem] = useState({ name: "", pcs: "" });

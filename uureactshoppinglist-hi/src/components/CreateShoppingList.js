@@ -1,5 +1,6 @@
-// CreateShoppingList.js
+
 import React, { useState } from 'react';
+import "./CreateShoppingList.css"
 
 const CreateShoppingList = ({ onCreate }) => {
   const [newListTitle, setNewListTitle] = useState('');
@@ -14,7 +15,7 @@ const CreateShoppingList = ({ onCreate }) => {
   };
 
   return (
-    <div>
+    <div className="create-shopping-list">
       <h3>Vytvořit nový nákupní seznam</h3>
       <input
         type="text"

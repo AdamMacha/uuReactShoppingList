@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import App from './App';
 import ShoppingLists from './components/ShoppingLists';
 import ListDetailPage from './components/ListDetailPage';
 

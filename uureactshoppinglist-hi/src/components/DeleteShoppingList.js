@@ -1,5 +1,5 @@
-// DeleteShoppingList.js
 import React from 'react';
+import "./DeleteShoppingList.css"
 
 const DeleteShoppingList = ({ onDelete, listId }) => {
   const handleDeleteList = () => {
@@ -7,8 +7,7 @@ const DeleteShoppingList = ({ onDelete, listId }) => {
   };
 
   return (
-    <div>
-      <h3>Smazat nákupní seznam</h3>
+    <div className="delete-shopping-list">
       <button onClick={handleDeleteList}>Smazat</button>
     </div>
   );

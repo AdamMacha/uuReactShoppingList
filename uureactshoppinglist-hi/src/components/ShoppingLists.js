@@ -1,12 +1,13 @@
-// ShoppingLists.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CreateShoppingList from './CreateShoppingList';
 import DeleteShoppingList from './DeleteShoppingList';
 import ListDetail from './ListDetail';
+import data from '../data/data';
+import "./ShoppingLists.css"
 
 const ShoppingLists = () => {
-  const [lists, setLists] = useState([]);
+  const [lists, setLists] = useState(data);
   const [selectedList, setSelectedList] = useState(null);
 
   const handleCreateList = (title) => {
@@ -30,7 +31,7 @@ const ShoppingLists = () => {
   };
 
   return (
-    <div>
+    <div className="shoppinglists-container">
       <h2>Seznam nákupů</h2>
       {selectedList ? (
         <ListDetail listTitle={selectedList.title} onBack={handleGoBack} />
@@ -38,9 +39,12 @@ const ShoppingLists = () => {
         <div>
           <CreateShoppingList onCreate={handleCreateList} />
           {lists.map((list) => (
-            <div key={list.id}>
-              <h3>{list.title}</h3>
-              <Link to={`/shopping-lists/${list.id}?title=${encodeURIComponent(list.title)}`}>
+            <div key={list.id} className="shoppinglist">
+              <h3 className="shoppinglist-title">{list.title}</h3>
+              <Link
+                to={`/shopping-lists/${list.id}?title=${encodeURIComponent(list.title)}`}
+                className="shoppinglist-detail-link"
+              >
                 Detail
               </Link>
               <DeleteShoppingList onDelete={handleDeleteList} listId={list.id} />

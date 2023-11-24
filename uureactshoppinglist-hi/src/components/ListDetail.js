@@ -1,10 +1,10 @@
 import React from 'react';
+import "./ListDetail.css"
 
 const ListDetail = ({ listTitle, onBack }) => {
   return (
-    <div>
+    <div className="list-detail">
       <h3>Detail nákupního seznamu: {listTitle}</h3>
-      {/* Zde můžete zobrazit další detaily o seznamu */}
       <button onClick={onBack}>Zpět</button>
     </div>
   );
