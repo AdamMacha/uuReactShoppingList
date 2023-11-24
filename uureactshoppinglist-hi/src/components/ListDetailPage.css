@@ -1,0 +1,35 @@
+.shoppinglist {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.items, .members {
+    width: 48%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px; 
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+@media (max-width: 600px) {
+    .items, .members {
+        width: 100%; 
+        max-width: none;
+        margin-bottom: 20px; 
+    }
+}

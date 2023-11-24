@@ -20,9 +20,9 @@ const DEMO_items = [
 
 ]
 
-const Items = () => {
+const Items = (props) => {
     const [items, setItems] = useState(DEMO_items);
-    const [title, setTitle] = useState("Můj nákupní seznam")
+    const [title, setTitle] = useState(props.title)
 
     const [newItem, setNewItem] = useState({ name: "", pcs: "" });
     const [openedItem, setOpenedItem] = useState(null);

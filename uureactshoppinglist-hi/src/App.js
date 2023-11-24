@@ -1,8 +1,5 @@
 import React from "react";
-
-
 import MembersList from "./components/MembersList";
-
 import Items from "./components/Items";
 
 function App() {
