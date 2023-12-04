@@ -1,4 +1,3 @@
-// ShoppingLists.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -47,6 +46,24 @@ const ShoppingLists = () => {
     setDeleteConfirmation({ isOpen: true, listId, listTitle });
   };
 
+  const confirmDeleteList = async () => {
+    try {
+      const { listId } = deleteConfirmation;
+      await axios.delete(`http://localhost:3001/api/shopping-lists/${listId}`);
+      const updatedLists = lists.filter((list) => list.id !== listId);
+      setLoading(true)
+      setLists(updatedLists);
+      setDeleteConfirmation({ isOpen: false, listId: null, listTitle: '' });
+      fetchShoppingLists()
+    } catch (error) {
+      console.error('Error deleting shopping list:', error);
+    }
+  };
+
+  const cancelDeleteList = () => {
+    setDeleteConfirmation({ isOpen: false, listId: null, listTitle: '' });
+  };
+
   if (loading) {
     return(
       <LoadingSpinner/>
@@ -61,22 +78,6 @@ const ShoppingLists = () => {
       </div>
     )
   }
-
-  const confirmDeleteList = async () => {
-    try {
-      const { listId } = deleteConfirmation;
-      await axios.delete(`http://localhost:3001/api/shopping-lists/${listId}`);
-      const updatedLists = lists.filter((list) => list.id !== listId);
-      setLists(updatedLists);
-      setDeleteConfirmation({ isOpen: false, listId: null, listTitle: '' });
-    } catch (error) {
-      console.error('Error deleting shopping list:', error);
-    }
-  };
-
-  const cancelDeleteList = () => {
-    setDeleteConfirmation({ isOpen: false, listId: null, listTitle: '' });
-  };
 
   return (
     <div>

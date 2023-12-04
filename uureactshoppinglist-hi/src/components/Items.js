@@ -1,21 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./css/Items.css"
+
+import { useParams } from "react-router-dom";
 
 import { Button } from "react-bootstrap";
 import { BiPencil } from "react-icons/bi";
+import LoadingSpinner from "./LoadingSpinner";
 
 
 const Items = (props) => {
+    const { id } = useParams();
+    const [listId, setListId] = useState(id)
     const [items, setItems] = useState(props.items);
     const [title, setTitle] = useState(props.title)
-
     const [newItem, setNewItem] = useState({ name: "", pcs: "" });
     const [openedItem, setOpenedItem] = useState(null);
     const [editedItem, setEditedItem] = useState(null);
     const [resolvedItems, setResolvedItems] = useState([]);
-
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newTitle, setNewTitle] = useState(title);
+
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+
+    useEffect(() => {
+        fetchItems();
+      }, [title]); 
+    
+      const fetchItems = async () => {
+        try {
+          const response = await axios.get(`http://localhost:3001/api/shopping-lists/${listId}/items`);
+          setItems(response.data);
+          setLoading(false)
+        } catch (error) {
+          console.error('Error fetching items:', error);
+          setItems([]);
+          setError(error.message)
+          setLoading(false)
+        }
+      };
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -39,21 +64,32 @@ const Items = (props) => {
         setNewItem({ ...newItem, [name]: value });
     };
 
-    const addItem = () => {
-        const id = items.length;
-        const updatedBooks = [...items, { id, ...newItem }];
-        setItems(updatedBooks);
-        setNewItem({ name: "", pcs: "" });
-    };
-
-    const deleteBook = (id) => {
-        const updatedBooks = items.filter((book) => book.id !== id);
-        setItems(updatedBooks);
-        if (openedItem && openedItem.id === id) {
-            setOpenedItem(null);
-            setEditedItem(null);
+    const addItem = async () => {
+        try {
+          await axios.post(`http://localhost:3001/api/shopping-lists/${props.id}/items`, {
+            name: newItem.name,
+          });
+          setNewItem({ name: "", pcs: "" });
+          setLoading(true)
+          fetchItems();
+        } catch (error) {
+          console.error("Error adding item:", error);
+          setError(error.message)
+          setLoading(false)
         }
-    };
+      };
+
+    const deleteItem = async (id) => {
+        try {
+          await axios.delete(`http://localhost:3001/api/shopping-lists/${props.id}/items/${id}`);
+          setLoading(true)
+          fetchItems(); 
+        } catch (error) {
+          console.error("Error deleting item:", error);
+          setError(error.message)
+          setLoading(false)
+        }
+      };
 
     const openItem = (id) => {
         const item = items.find((b) => b.id === id);
@@ -66,11 +102,11 @@ const Items = (props) => {
         setEditedItem({ ...editedItem, [name]: value });
     };
 
-    const saveEditedBook = () => {
-        const updatedBooks = items.map((item) =>
+    const saveEditedItem = () => {
+        const updatedItems = items.map((item) =>
             item.id === openedItem.id ? { ...item, ...editedItem } : item
         );
-        setItems(updatedBooks);
+        setItems(updatedItems);
         setOpenedItem({ ...openedItem, ...editedItem });
         setEditedItem(null);
     };
@@ -103,6 +139,20 @@ const Items = (props) => {
         setItems(updatedItems);
       };
 
+    if (loading) {
+        return(
+            <LoadingSpinner/>
+        )
+    }  
+
+    if (error) {
+        return (
+            <div>
+                <h2>Nebylo možné načíst data</h2>
+            </div>
+        )
+    }
+
     return (
         <>
             <div className="shopping-lists">
@@ -132,7 +182,7 @@ const Items = (props) => {
                                 </button>
                                 <button
                                     className="button-delete"
-                                    onClick={() => deleteBook(oneItem.id)}
+                                    onClick={() => deleteItem(oneItem.id)}
                                 >
                                     Smazat
                                 </button>
@@ -211,7 +261,7 @@ const Items = (props) => {
                                     />
                                 </div>
                             </div>
-                            <button className="save-button" onClick={saveEditedBook}>Uložit</button>
+                            <button className="save-button" onClick={saveEditedItem}>Uložit</button>
                         </div>
                     ) : (
                         <div>

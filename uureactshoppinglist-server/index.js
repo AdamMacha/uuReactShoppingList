@@ -8,23 +8,38 @@ const PORT = 3001;
 
 app.use(bodyParser.json());
 
-const shoppingLists = [
+let shoppingLists = [
     {
       id: 1,
-      title: 'Nákupní seznam 1',
+      title: 'Tesco seznam',
       items: [
-        { id: 1, name: 'Paprika' },
-        { id: 2, name: 'Chléb' },
+        { id: 1, name: 'Paprika', pcs: "5" },
+        { id: 2, name: 'Chléb', pcs: "2" },
       ],
     },
     {
       id: 2,
-      title: 'Nákupní seznam 2',
+      title: 'Lidl seznam',
       items: [
-        { id: 3, name: 'Mléko' },
-        { id: 4, name: 'Cibule' },
+        { id: 3, name: 'Mléko', pcs: "3" },
+        { id: 4, name: 'Cibule', pcs: "2" },
       ],
-    },
+    },    {
+        id: 3,
+        title: 'Albert seznam',
+        items: [
+          { id: 5, name: 'Paprika', pcs: "2" },
+          { id: 6, name: 'Chléb', pcs: "1" },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Billa seznam',
+        items: [
+          { id: 7, name: 'Mléko', pcs: "7" },
+          { id: 8, name: 'Cibule', pcs: "5" },
+        ],
+      },
   ];
 
 app.get('/api/shopping-lists', (req, res) => {
